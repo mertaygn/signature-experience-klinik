@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klinik Sosyal Sahne — Signature Experience Agency</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0c0d10;
+    --surface: #13151a;
+    --border: #1e2028;
+    --green: #1f8a3f;
+    --green-light: #27a34b;
+    --text: #e8eaf0;
+    --muted: #6b7280;
+    --accent: #a8adb7;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(12,13,16,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    z-index: 100;
+  }
+  .nav-logo { font-size: .85rem; font-weight: 700; letter-spacing: .08em; color: var(--green); text-transform: uppercase; }
+  .nav-cta {
+    background: var(--green); color: #fff; border: none;
+    padding: .45rem 1.1rem; border-radius: 6px;
+    font-size: .82rem; font-weight: 600; cursor: pointer;
+    text-decoration: none; transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--green-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(31,138,63,.12) 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(31,138,63,.12);
+    border: 1px solid rgba(31,138,63,.3);
+    color: var(--green-light);
+    font-size: .75rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: .35rem .9rem; border-radius: 99px;
+    margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 800; line-height: 1.15;
+    letter-spacing: -.02em;
+    max-width: 760px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 span { color: var(--green); }
+  .hero p {
+    font-size: 1.15rem; color: var(--accent);
+    max-width: 540px; margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    background: var(--green); color: #fff;
+    padding: .8rem 2rem; border-radius: 8px;
+    font-size: 1rem; font-weight: 600;
+    text-decoration: none; transition: background .2s;
+  }
+  .btn-primary:hover { background: var(--green-light); }
+  .btn-secondary {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+    padding: .8rem 2rem; border-radius: 8px;
+    font-size: 1rem; font-weight: 500;
+    text-decoration: none; transition: border-color .2s;
+  }
+  .btn-secondary:hover { border-color: var(--green); }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 960px; margin: 0 auto; }
+  .section-label {
+    font-size: .72rem; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--green); margin-bottom: .75rem;
+  }
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 800; letter-spacing: -.02em;
+    margin-bottom: 1rem;
+  }
+  .lead { font-size: 1.05rem; color: var(--accent); max-width: 600px; margin-bottom: 3rem; }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--border); }
+
+  /* PROBLEM */
+  .problem-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    margin-top: 2rem;
+  }
+  .problem-item {
+    background: var(--surface);
+    padding: 1.8rem;
+  }
+  .problem-num {
+    font-size: 2.2rem; font-weight: 800; color: var(--green);
+    line-height: 1; margin-bottom: .5rem;
+  }
+  .problem-item p { font-size: .9rem; color: var(--accent); }
+
+  /* DELIVERABLES */
+  .deliverables-table {
+    width: 100%; border-collapse: collapse; margin-top: 2rem;
+  }
+  .deliverables-table th {
+    text-align: left; padding: .75rem 1rem;
+    font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); border-bottom: 1px solid var(--border);
+  }
+  .deliverables-table td {
+    padding: 1rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: .92rem;
+    vertical-align: top;
+  }
+  .deliverables-table tr:last-child td { border-bottom: none; }
+  .deliverables-table tr:hover td { background: rgba(255,255,255,.02); }
+  .badge-count {
+    display: inline-block;
+    background: rgba(31,138,63,.15);
+    color: var(--green-light);
+    font-weight: 700; font-size: .8rem;
+    padding: .15rem .55rem; border-radius: 99px;
+    white-space: nowrap;
+  }
+
+  /* HOW IT WORKS */
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; }
+  .step {
+    display: flex; gap: 1.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    background: rgba(31,138,63,.15);
+    border: 1px solid rgba(31,138,63,.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .85rem; font-weight: 800; color: var(--green);
+  }
+  .step-title { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+  .step-desc { font-size: .9rem; color: var(--accent); }
+
+  /* COMPLIANCE */
+  .compliance-list {
+    list-style: none; margin-top: 2rem;
+    display: flex; flex-direction: column; gap: .75rem;
+  }
+  .compliance-list li {
+    display: flex; align-items: flex-start; gap: .75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem 1.25rem;
+    font-size: .9rem;
+  }
+  .compliance-list li::before {
+    content: "✕";
+    color: #ef4444; font-weight: 800; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem; margin-top: 2.5rem;
+  }
+  .pricing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    position: relative;
+    transition: border-color .2s;
+  }
+  .pricing-card:hover { border-color: var(--green); }
+  .pricing-card.featured {
+    border-color: var(--green);
+    background: linear-gradient(135deg, rgba(31,138,63,.08) 0%, var(--surface) 60%);
+  }
+  .featured-tag {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--green); color: #fff;
+    font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    padding: .3rem .8rem; border-radius: 99px; white-space: nowrap;
+  }
+  .tier-label { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .6rem; }
+  .tier-name { font-size: 1.1rem; font-weight: 700; margin-bottom: .3rem; }
+  .tier-desc { font-size: .82rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .tier-price { font-size: 2.2rem; font-weight: 800; color: var(--text); line-height: 1; }
+  .tier-price span { font-size: 1rem; font-weight: 500; color: var(--muted); }
+  .tier-note { font-size: .78rem; color: var(--muted); margin-top: .4rem; margin-bottom: 1.5rem; }
+
+  /* PILOT */
+  .pilot-box {
+    background: linear-gradient(135deg, rgba(31,138,63,.1) 0%, var(--surface) 100%);
+    border: 1px solid rgba(31,138,63,.4);
+    border-radius: 14px; padding: 2.5rem;
+    margin-top: 2.5rem;
+    display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;
+  }
+  .pilot-box h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: .5rem; }
+  .pilot-box p { font-size: .9rem; color: var(--accent); }
+  .pilot-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  .pilot-table th { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: .5rem .75rem; text-align: left; }
+  .pilot-table td { padding: .6rem .75rem; font-size: .9rem; border-top: 1px solid var(--border); }
+  .strike { text-decoration: line-through; color: var(--muted); }
+  .green-bold { color: var(--green); font-weight: 800; }
+
+  /* GUARANTEES */
+  .guarantee-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; margin-top: 2rem;
+  }
+  .guarantee-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem;
+  }
+  .guarantee-icon { font-size: 1.6rem; margin-bottom: .75rem; }
+  .guarantee-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: .4rem; }
+  .guarantee-card p { font-size: .82rem; color: var(--accent); }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 1px; margin-top: 2rem; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  details {
+    background: var(--surface);
+  }
+  summary {
+    padding: 1.25rem 1.5rem;
+    font-size: .95rem; font-weight: 600;
+    cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--green); font-size: 1.2rem; font-weight: 300; }
+  details[open] summary::after { content: "−"; }
+  .faq-answer { padding: 0 1.5rem 1.25rem; font-size: .9rem; color: var(--accent); line-height: 1.7; }
+
+  /* CTA */
+  .cta-section {
+    text-align: center;
+    padding: 6rem 2rem;
+    background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(31,138,63,.1) 0%, transparent 70%);
+    border-top: 1px solid var(--border);
+  }
+  .cta-section h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; }
+  .cta-section p { font-size: 1.05rem; color: var(--accent); max-width: 480px; margin: 0 auto 2.5rem; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: .8rem; color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    .pilot-box { flex-direction: column; }
+    .step { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Signature Experience</span>
+  <a href="https://calendly.com/signatureexperience/klinik-tanisma" class="nav-cta" target="_blank">30 dk Tanışma →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-badge">Estetik & Diş Kliniklerine Özel</span>
+  <h1>Kliniğinizin Sosyal Medyasını <span>Bize Bırakın</span></h1>
+  <p>Aylık 30 post · 8 reels · 4 blog · DM otomasyonu · raporlama. AI hızında, insan kalitesinde. Sağlık mevzuatına uyumlu.</p>
+  <div class="hero-btns">
+    <a href="#fiyatlar" class="btn-primary">Paketleri Gör</a>
+    <a href="#nasil-calisir" class="btn-secondary">Nasıl çalışır?</a>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section>
+  <div class="section-label">Problem</div>
+  <h2>Çoğu Klinik Sosyal Medyada Tıkanmış</h2>
+  <p class="lead">Tutarsız paylaşım, mevzuat riski, ölçülemeyen sonuç. Klinik büyüyor ama dijital vitrin durmuş.</p>
+
+  <div class="problem-grid">
+    <div class="problem-item">
+      <div class="problem-num">%80</div>
+      <p>Estetik kliniklerin büyük çoğunluğu sosyal medyada tutarsız içerik üretiyor</p>
+    </div>
+    <div class="problem-item">
+      <div class="problem-num">5 sa</div>
+      <p>Freelance'la çalışan kliniğin içerik sürecine haftada harcadığı ortalama süre</p>
+    </div>
+    <div class="problem-item">
+      <div class="problem-num">₺0</div>
+      <p>Tutarsız sosyal medyanın geri dönüşü — potansiyel hasta başka kliniği seçiyor</p>
+    </div>
+    <div class="problem-item">
+      <div class="problem-num">Reklam<br>Kurulu</div>
+      <p>Farkında olmadan yapılan mevzuat ihlalleri kliniklere ciddi ceza riski taşıyor</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- DELIVERABLES -->
+<section>
+  <div class="section-label">Hizmet Kapsamı</div>
+  <h2>Her Ay Teslim Edilenler</h2>
+  <p class="lead">Aylık aboneliğinizde kliniğinize hazır teslim edilen çıktılar.</p>
+
+  <table class="deliverables-table">
+    <thead>
+      <tr>
+        <th>Çıktı</th>
+        <th>Adet</th>
+        <th>Detay</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Instagram feed post</td>
+        <td><span class="badge-count">30</span></td>
+        <td>Görsel + caption + hashtag + planlanan saat</td>
+      </tr>
+      <tr>
+        <td>Instagram reels script</td>
+        <td><span class="badge-count">8</span></td>
+        <td>Çekim talimatlı storyboard, klinik ekibi çeker</td>
+      </tr>
+      <tr>
+        <td>Instagram story serisi</td>
+        <td><span class="badge-count">12</span></td>
+        <td>Poll, quiz, CTA — etkileşim odaklı</td>
+      </tr>
+      <tr>
+        <td>Blog yazısı</td>
+        <td><span class="badge-count">4</span></td>
+        <td>1.500–2.000 kelime, SEO optimize, klinik web sitesi için</td>
+      </tr>
+      <tr>
+        <td>DM otomasyon (Manychat)</td>
+        <td><span class="badge-count">1 setup</span></td>
+        <td>İlk ay kurulum, sonraki aylar revizyon</td>
+      </tr>
+      <tr>
+        <td>Google Ads şablonu</td>
+        <td><span class="badge-count">1 set</span></td>
+        <td>Hazır copy + audience tanımı, klinik kendi yönetir</td>
+      </tr>
+      <tr>
+        <td>Sezonsal kampanya planı</td>
+        <td><span class="badge-count">1</span></td>
+        <td>Özel günler, dönemsel fırsatlar</td>
+      </tr>
+      <tr>
+        <td>Aylık metrik raporu</td>
+        <td><span class="badge-count">1</span></td>
+        <td>Impressions, profile visit, DM gelen, en iyi post analizi</td>
+      </tr>
+      <tr>
+        <td>Strateji görüşmesi</td>
+        <td><span class="badge-count">1 × 15 dk</span></td>
+        <td>Aylık sonuç değerlendirmesi, Zoom/Meet</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr>
+
+<!-- HOW IT WORKS -->
+<section id="nasil-calisir">
+  <div class="section-label">Süreç</div>
+  <h2>Nasıl Çalışır</h2>
+  <p class="lead">Onboarding'den aylık rutine kadar üç adım.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Onboarding — 1. Hafta</div>
+        <div class="step-desc">Kick-off görüşmesi yapılır. Kliniğin sesi, rengi, hekimin uzmanlığı netleştirilir. Brand voice belgesi hazırlanır. İlk aylık içerik takvimi sunulur ve onaylanır.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Üretim & Onay — Her Ay</div>
+        <div class="step-desc">Tüm içerikler yayından 24 saat önce klinik onayına gelir. Hekim kontrolü klinik tarafında tamamlanır. Onay gelmezse içerik yayınlanmaz — sıfır sürpriz.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Yayın & Ölçüm</div>
+        <div class="step-desc">Planlı saatlerde yayın. Aylık raporla ne işe yaradığı netleştirilir. Strateji görüşmesinde bir sonraki ay kalibre edilir. Sürekli iyileşen sistem.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- COMPLIANCE -->
+<section>
+  <div class="section-label">Mevzuat</div>
+  <h2>Sağlık Reklam Kurallarını Biz Takip Ediyoruz</h2>
+  <p class="lead">Hekim Tanıtım Yönetmeliği ve Reklam Kurulu klinik kararlarına göre — her içerik yayından önce kontrol listesinden geçer.</p>
+
+  <ul class="compliance-list">
+    <li>"Garantili sonuç", "Türkiye'nin en iyisi", "%100 başarı" gibi vaat ifadeleri kullanılmaz</li>
+    <li>Rakip klinik karşılaştırması yapılmaz</li>
+    <li>Hasta yüzü yazılı izin olmadan yayınlanmaz</li>
+    <li>Yanıltıcı önce/sonra fotoğrafı formatı kullanılmaz</li>
+    <li>Tıbbi içerik hekim onayı olmadan yayına girmez</li>
+  </ul>
+</section>
+
+<hr>
+
+<!-- PRICING -->
+<section id="fiyatlar">
+  <div class="section-label">Fiyatlar</div>
+  <h2>Paketler</h2>
+  <p class="lead">Kliniğinizin konumuna ve büyüklüğüne göre üç tier. Tüm paketlerde aynı çıktı kapsamı.</p>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="tier-label">Tier 1</div>
+      <div class="tier-name">Anadolu Klinik</div>
+      <div class="tier-desc">Bursa, Konya, Adana, Gaziantep ve Antalya turistik dışı</div>
+      <div class="tier-price">₺18.000 <span>/ ay</span></div>
+      <div class="tier-note">6 ay minimum · 6 ay peşin → %10 indirim</div>
+    </div>
+    <div class="pricing-card featured">
+      <div class="featured-tag">En Popüler</div>
+      <div class="tier-label">Tier 2</div>
+      <div class="tier-name">3 Büyük Şehir</div>
+      <div class="tier-desc">İstanbul, Ankara, İzmir orta ölçekli klinikler</div>
+      <div class="tier-price">₺28.000 <span>/ ay</span></div>
+      <div class="tier-note">6 ay minimum · 6 ay peşin → %10 indirim</div>
+    </div>
+    <div class="pricing-card">
+      <div class="tier-label">Tier 3</div>
+      <div class="tier-name">Butik & Turistik</div>
+      <div class="tier-desc">İstanbul/Ankara butik, Antalya medikal turizm, estetik zincirler</div>
+      <div class="tier-price">₺42.000 <span>/ ay</span></div>
+      <div class="tier-note">6 ay minimum · 6 ay peşin → %10 indirim</div>
+    </div>
+  </div>
+
+  <!-- PILOT -->
+  <div class="pilot-box">
+    <div style="flex:1; min-width:200px;">
+      <h3>🚀 Pilot Program</h3>
+      <p>İlk 3 müşterimize <strong>%50 indirim</strong>. Karşılığında: vaka çalışması ve referans paylaşım izni. 3 ay minimum, süre sonunda tam fiyat veya ayrılma serbesttir.</p>
+    </div>
+    <div style="flex:1; min-width:220px;">
+      <table class="pilot-table">
+        <thead>
+          <tr><th>Tier</th><th>Normal</th><th>Pilot</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Tier 1</td><td class="strike">₺18.000</td><td class="green-bold">₺9.000</td></tr>
+          <tr><td>Tier 2</td><td class="strike">₺28.000</td><td class="green-bold">₺14.000</td></tr>
+          <tr><td>Tier 3</td><td class="strike">₺42.000</td><td class="green-bold">₺21.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- GUARANTEES -->
+<section>
+  <div class="section-label">Güvenceler</div>
+  <h2>Risk Sizde Değil</h2>
+  <p class="lead">İlk ay deneyin. Beğenmezseniz paranızı alın.</p>
+
+  <div class="guarantee-grid">
+    <div class="guarantee-card">
+      <div class="guarantee-icon">💰</div>
+      <h4>İlk Ay Para İadesi</h4>
+      <p>30. günde memnun değilseniz ilk ayın tamamını iade ederiz. Koşulsuz.</p>
+    </div>
+    <div class="guarantee-card">
+      <div class="guarantee-icon">✅</div>
+      <h4>24 Saat Onay Akışı</h4>
+      <p>Hiçbir içerik onaysız yayınlanmaz. Kliniğin sesi korunur.</p>
+    </div>
+    <div class="guarantee-card">
+      <div class="guarantee-icon">📅</div>
+      <h4>Tutarlı Teslim</h4>
+      <p>AI + insan kombinasyonu — hiç boş ay, hiç eksik teslim olmaz.</p>
+    </div>
+    <div class="guarantee-card">
+      <div class="guarantee-icon">⚖️</div>
+      <h4>Mevzuat Uyumu</h4>
+      <p>Her içerik Sağlık Bakanlığı kuralları kontrol listesinden geçer.</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- FAQ -->
+<section>
+  <div class="section-label">SSS</div>
+  <h2>Sık Sorulan Sorular</h2>
+
+  <div class="faq-list">
+    <details>
+      <summary>Kendi AI'ımızla aynı sonucu almaz mıyız?</summary>
+      <div class="faq-answer">AI bir araç, biz bir sistem. Araç haftada 5 saat dikkat ister — prompt yazmak, görsel hazırlamak, mevzuatı kontrol etmek, onay almak, yayınlamak, ölçmek. Biz bu sistemin tamamını kurulu getiriyoruz. Siz kliniğe bakıyorsunuz.</div>
+    </details>
+    <details>
+      <summary>Freelance neden değil?</summary>
+      <div class="faq-answer">Freelance tek kişi — hastalanır, tatile çıkar, bir ay kaybolur. Biz AI hızıyla çalışan bir ekip altyapısıyız. Tutarlı teslim, her ay, sözleşme garantisi ile.</div>
+    </details>
+    <details>
+      <summary>6 ay sözleşme neden?</summary>
+      <div class="faq-answer">İçerik pazarlaması 60 günde audience'a oturur, 90 günde metric görünür hale gelir. 1-2 ayda "bir şey değişmedi" demek normaldir. İlk ay para iadesi bu riski sıfırlar — 6 ay korkutucu bir taahhüt değil.</div>
+    </details>
+    <details>
+      <summary>Sağlık reklam mevzuatını biliyor musunuz?</summary>
+      <div class="faq-answer">Evet. Hekim Tanıtım Yönetmeliği ve Reklam Kurulu kararlarını yakından takip ediyoruz. Her içerik uyum listesinden geçiyor. Tıbbi içeriğin nihai onayı her zaman sizin hekiminizde.</div>
+    </details>
+    <details>
+      <summary>Kliniğimizin sesi korunacak mı?</summary>
+      <div class="faq-answer">Evet. Onboarding haftasında brand voice belgesi hazırlanır. Hekim kimliği, klinik tonu, yasaklı ifadeler — hepsi yazılı hale getirilir. Tüm içerik bu belgeye göre üretilir.</div>
+    </details>
+    <details>
+      <summary>Biz ne sağlamak zorundayız?</summary>
+      <div class="faq-answer">Aylık minimum 30 orijinal klinik fotoğrafı ve en az 1 yazılı hasta yorumu (izinli). Geri kalanı biz. Büyük ajans kalitesi, küçük klinik zamanıyla.</div>
+    </details>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>30 Dakika Ayırın</h2>
+  <p>Kliniğinizin sosyal medyasını birlikte değerlendirelim. Pitch yok, satış baskısı yok — sadece dürüst bir tanışma.</p>
+  <div class="hero-btns" style="justify-content:center">
+    <a href="https://calendly.com/signatureexperience/klinik-tanisma" class="btn-primary" target="_blank">Randevu Al →</a>
+    <a href="mailto:hello@signatureexperience.agency" class="btn-secondary">E-posta Gönder</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Signature Experience Agency · hello@signatureexperience.agency · signatureexperience.agency/klinik</p>
+  <p style="margin-top:.5rem">Tüm içerikler Sağlık Bakanlığı reklam mevzuatına uygun üretilir.</p>
+</footer>
+
+</body>
+</html>
